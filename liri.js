@@ -19,10 +19,8 @@ var song = process.argv[3];
     // movie-this
     // do-what-it-says
 if (command === "movie-this") {
-    console.log(command);
     movieThis(movie);
 } else if (command === "spotify-this-song") {
-    console.log(command);
     spotifyThisSong(song);
 }
 
@@ -39,16 +37,20 @@ function spotifyThisSong(song_name) {
         // A preview link of the song from Spotify
         // The album that the song is from
 
-    spotify.search({ type: 'track', query: song_name }, function(err, data) {
+    spotify.search({ type: 'track', query: song_name , limit: 3}, function(err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
+
+        var obj = data.tracks.items[0];
         
-        console.log(JSON.stringify(data.tracks.items));
-        // Do something with 'data'
+        console.log("Artist: " + obj.artists[0].name)
+        console.log("Song Title: " + obj.name);
+        console.log("Link: " + obj.external_urls.spotify);
+        console.log("Album: " + obj.album.name);
     });
 }
-// 'movie-this`
+
 function movieThis(movie_name) {
 
     request("http://www.omdbapi.com/?t=" + movie_name + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
@@ -66,6 +68,7 @@ function movieThis(movie_name) {
     });
     
 }
+
 // 'do-what-it-says`
 function doWhatItSays() {
     // Using the fs Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
