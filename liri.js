@@ -4,7 +4,7 @@ const request = require("request");
 const Spotify = require("node-spotify-api")
 
 // TODO: Add the code required to import the keys.js file and store it in a variable
-require("./key");
+key = require("./key");
 
 var spotify = new Spotify(key.spotify);
 // var client_Twitter = new Twitter(keys.twitter);
@@ -44,7 +44,7 @@ function spotifyThisSong(song_name) {
             return console.log('Error occurred: ' + err);
         }
         
-        console.log(data);
+        console.log(JSON.stringify(data.tracks.items));
         // Do something with 'data'
     });
 }
@@ -64,15 +64,6 @@ function movieThis(movie_name) {
             console.log("Actors: " + JSON.parse(body).Actors);
         }
     });
-    
-    // Title of the movie.
-        // Year the movie came out.
-        // IMDB Rating of the movie.
-        // Rotten Tomatoes Rating of the movie.
-        // Country where the movie was produced.
-        // Language of the movie.
-        // Plot of the movie.
-        // Actors in the movie.
     
 }
 // 'do-what-it-says`
