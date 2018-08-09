@@ -104,6 +104,8 @@ function doWhatItSays() {
             movieThis(request);
         } else if (command === "spotify-this-song") {
             spotifyThisSong(request);
+        } else if (command === "my-tweets") {
+            myTweets();
         }
     });
 }
