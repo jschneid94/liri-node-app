@@ -43,12 +43,13 @@ function myTweets() {
                     break; 
                 }
                 var post = tweets[i];
-                var output = "\nTweet: " + post.text + "\nPosted On: " + post.created_at + "\n-----------------";
+                var output = "\nTweet: " 
+                            + post.text 
+                            + "\nPosted On: " 
+                            + post.created_at 
+                            + "\n-----------------";
                 console.log(output);
                 outputLog(output);
-                // console.log("\nTweet: " + post.text)
-                // console.log("Posted On: " + post.created_at);
-                // console.log("\n-----------------");
             }
         }
     });
@@ -60,11 +61,13 @@ function spotifyThisSong(song_name) {
             return console.log('Error occurred: ' + err);
         }
         var obj = data.tracks.items[0];
-        console.log("\nArtist: " + obj.artists[0].name)
-        console.log("Song Title: " + obj.name);
-        console.log("Link: " + obj.external_urls.spotify);
-        console.log("Album: " + obj.album.name);
-        console.log("\n-----------------");
+        var output = "\nArtist: " + obj.artists[0].name
+                    + "\nSong Title: " + obj.name
+                    + "\nLink: " + obj.external_urls.spotify
+                    + "\nAlbum: " + obj.album.name
+                    + "\n-----------------";
+        console.log(output);
+        outputLog(output);
     });
 }
 // OMDB -  Returns information about a movie
@@ -74,18 +77,19 @@ function movieThis(movie_name) {
             return console.log('Error occurred: ' + error);
         }
         if (!error && response.statusCode === 200) {
-            console.log("\nTitle: " + JSON.parse(body).Title);
-            console.log("Year: " + JSON.parse(body).Year);
-            console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-            console.log("Country: " + JSON.parse(body).Country);
-            console.log("Language: " + JSON.parse(body).Language);
-            console.log("Plot: " + JSON.parse(body).Plot);
-            console.log("Actors: " + JSON.parse(body).Actors);
-            console.log("\n-----------------");
+            var output = "\nTitle: " + JSON.parse(body).Title
+                        + "\nYear: " + JSON.parse(body).Year
+                        + "\nIMDB Rating: " + JSON.parse(body).imdbRating
+                        + "\nRotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value
+                        + "\nCountry: " + JSON.parse(body).Country
+                        + "\nLanguage: " + JSON.parse(body).Language
+                        + "\nPlot: " + JSON.parse(body).Plot
+                        + "\nActors: " + JSON.parse(body).Actors
+                        + "\n-----------------";
+            console.log(output);
+            outputLog(output);
         }
     });
-    
 }
 // Do What It Says - Performs the command written in random.txt
 function doWhatItSays() {
