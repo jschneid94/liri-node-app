@@ -35,7 +35,7 @@ if (command === "movie-this") {
 // Twitter - Returns the most recent tweets from the client account
 function myTweets() {
     var params = {screen_name: 'jschneid94'};
-    twitter.get('statuses/user_timeline', params, function(error, tweets) {
+    twitter.get('statuses/user_timeline', params, function(error, tweets, result) {
         if (!error) {
             for (var i = 0; i < 20; i++) {
                 // If there are less than 20 tweets, stop the for loop
@@ -43,9 +43,12 @@ function myTweets() {
                     break; 
                 }
                 var post = tweets[i];
-                console.log("\nTweet: " + post.text)
-                console.log("Posted On: " + post.created_at);
-                console.log("\n-----------------");
+                var output = "\nTweet: " + post.text + "\nPosted On: " + post.created_at + "\n-----------------";
+                console.log(output);
+                outputLog(output);
+                // console.log("\nTweet: " + post.text)
+                // console.log("Posted On: " + post.created_at);
+                // console.log("\n-----------------");
             }
         }
     });
@@ -100,4 +103,13 @@ function doWhatItSays() {
         }
     });
 }
-
+// Output Log - Adds output of commands to log.txt
+function outputLog(output) {
+    fs.appendFile("log.txt", output, function(error) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log("Output has been added to the log.");
+        }
+    });
+} 
