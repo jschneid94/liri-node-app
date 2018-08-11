@@ -16,10 +16,18 @@ var twitter = new Twitter(key.twitter);
 var command = process.argv[2];
 var media = process.argv[3];
 
-// If LIRI will respond if it receives one of the follow commands:
+// LIRI will respond if it receives one of the follow commands:
 if (command === "movie-this") {
+    // If there is no movie specified, search for the movie "Mr. Nobody"
+    if (media === undefined) {
+        media = "Mr. Nobody";
+    }
     movieThis(media);
 } else if (command === "spotify-this-song") {
+    // If there is no song specified, search for the song "The Sign"
+    if (media === undefined) {
+        media = "The Sign Ace of Base";
+    }
     spotifyThisSong(media);
 } else if (command === "do-what-it-says") {
     doWhatItSays();
@@ -35,7 +43,7 @@ if (command === "movie-this") {
 // Twitter - Returns the most recent tweets from the client account
 function myTweets() {
     var params = {screen_name: 'jschneid94'};
-    twitter.get('statuses/user_timeline', params, function(error, tweets, result) {
+    twitter.get('statuses/user_timeline', params, function(error, tweets) {
         if (!error) {
             for (var i = 0; i < 20; i++) {
                 // If there are less than 20 tweets, stop the for loop
@@ -55,6 +63,7 @@ function myTweets() {
     });
 }
 // Spotify - Returns information about a song 
+// TO DO - If no song is provided then your program will default to "The Sign" by Ace of Base.
 function spotifyThisSong(song_name) {
     spotify.search({ type: 'track', query: song_name , limit: 3}, function(err, data) {
         if (err) {
@@ -71,6 +80,7 @@ function spotifyThisSong(song_name) {
     });
 }
 // OMDB -  Returns information about a movie
+// TO DO -If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
 function movieThis(movie_name) {
     request("http://www.omdbapi.com/?t=" + movie_name + "&y=&plot=short&apikey=trilogy", function(error, response, body) {
         if (error) {
